@@ -13,7 +13,7 @@ const PokemonList = () => {
         .then(res => res.json())
         .then(data => {
           setDisplayedPokemon(prev => [...prev, ...data.results])
-          setPokemonOffset(prevOffset => prevOffset + 5); //Inc offset
+          setPokemonOffset(prevOffset => prevOffset + data.results.length); //Inc offset
           setLimit(prev => data.count)
           console.log(displayedPokemon);
         })
@@ -33,7 +33,7 @@ const PokemonList = () => {
         ))}
       </ul>
       <p>Displaying {pokemonOffset} of {limit} results</p>
-      {(pokemonOffset < (limit - 5)) ? <button onClick={getPokemon}>Load more</button> : ''}
+      {(pokemonOffset < limit) ? <button onClick={getPokemon}>Load more</button> : ''}
         
     </div>
   )
